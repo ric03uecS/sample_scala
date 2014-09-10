@@ -6,7 +6,6 @@ scala:
 script:
   - export SBT_OPTS="-XX:+CMSClassUnloadingEnabled -XX:PermSize=256M -XX:MaxPermSize=512M"
   - sbt clean scoverage:test
-  - invalidcommand
 
 after_script:
   - mkdir -p shippable/codecoverage
