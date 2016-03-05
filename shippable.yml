@@ -2,19 +2,17 @@ language: scala
 
 scala:
     - 2.11.0
+    
+jdk:
+    - oraclejdk8
+    - oraclejdk7
 
-#jdk:
-#    - oraclejdk8
+build:
+  ci:
+    - export PATH=$PATH:$SHIPPABLE_REPO_DIR
+    - export SBT_OPTS="-XX:+CMSClassUnloadingEnabled -XX:PermSize=256M -XX:MaxPermSize=512M"
+    - sbt clean scoverage:test
 
-before_script:
-  - export PATH=$PATH:$SHIPPABLE_REPO_DIR
-  
-
-
-script:
-  - export SBT_OPTS="-XX:+CMSClassUnloadingEnabled -XX:PermSize=256M -XX:MaxPermSize=512M"
-  - sbt clean scoverage:test
-
-after_script:
-  - mkdir -p shippable/codecoverage
-  - mv target/scala-2.11/coverage-report/cobertura.xml $PWD/shippable/codecoverage/
+  post_ci:
+    - mkdir -p shippable/codecoverage
+    - mv target/scala-2.11/coverage-report/cobertura.xml $PWD/shippable/codecoverage/
