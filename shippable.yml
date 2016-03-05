@@ -3,8 +3,9 @@ language: scala
 scala:
     - 2.11.0
 
-#jdk:
-#    - oraclejdk8
+jdk:
+    - oraclejdk8
+    - oraclejdk7
 
 before_script:
   - export PATH=$PATH:$SHIPPABLE_REPO_DIR
